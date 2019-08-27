@@ -1,0 +1,12 @@
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+{% if latest_message_list %}
+    <ul>
+    {% for message in latest_message_list %}
+        {{ message.pub_date }}
+        <li><a>{{ message.user_alias }} : {{ message.message_text }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No messages are available.</p>
+{% endif %}

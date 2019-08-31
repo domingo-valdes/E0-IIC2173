@@ -12,7 +12,7 @@ def index(request):
     if form.is_valid():
         form.save()
     # latest_message_list = Message.objects.order_by('-pub_date')[:5]
-    latest_message_list = Message.objects.order_by('-id')[:100][::-1]
+    latest_message_list = Message.objects.order_by('-id')[:100]
     page = request.GET.get('page',1)
     paginator = Paginator(latest_message_list, 5)
     template = loader.get_template('chatting/index.html')

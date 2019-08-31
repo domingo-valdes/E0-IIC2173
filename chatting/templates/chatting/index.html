@@ -1,12 +1,71 @@
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-{% if latest_message_list %}
-    <ul>
-    {% for message in latest_message_list %}
+{% if messages %}
+
+<table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Alias</th>
+            <th>Message</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for message in messages %}
+            <tr>
+              <td>{{ message.pub_date }}</td>
+              <td>{{ message.user_alias }}</td>
+              <td>{{ message.message_text }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      
+      {% if messages.has_other_pages %}
+        <ul class="pagination">
+          {% if messages.has_previous %}
+            <li><a href="?page={{ messages.previous_page_number }}">&laquo;</a></li>
+          {% else %}
+            <li class="disabled"><span>&laquo;</span></li>
+          {% endif %}
+          {% for i in messages.paginator.page_range %}
+            {% if messages.number == i %}
+              <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+            {% else %}
+              <li><a href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %}
+          {% endfor %}
+          {% if messages.has_next %}
+            <li><a href="?page={{ messages.next_page_number }}">&raquo;</a></li>
+          {% else %}
+            <li class="disabled"><span>&raquo;</span></li>
+          {% endif %}
+        </ul>
+      {% endif %}
+
+    <!-- {% for message in messages %}
         {{ message.pub_date }}
-        <li><a>{{ message.user_alias }} : {{ message.message_text }}</a></li>
+        {{ message.user_alias }} : {{ message.message_text }} <br>
     {% endfor %}
-    </ul>
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if messages.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ messages.previous_page_number }}">previous</a>
+            {% endif %}
+    
+            <span class="current">
+                {{ messages.pub_date }}
+                {{ messages.user_alias }} : {{ messages.message_text }}
+            </span>
+    
+            {% if contacts.has_next %}
+                <a href="?page={{ contacts.next_page_number }}">next</a>
+                <a href="?page={{ contacts.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div> -->
 {% else %}
     <p>No messages are available.</p>
 {% endif %}
@@ -15,3 +74,6 @@
     {{form.as_p}}
     <input type='submit' value='Save'/>
 </form>
+
+
+

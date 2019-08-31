@@ -10,3 +10,8 @@
 {% else %}
     <p>No messages are available.</p>
 {% endif %}
+
+<form method="POST"> {% csrf_token %}
+    {{form.as_p}}
+    <input type='submit' value='Save'/>
+</form>

@@ -7,6 +7,11 @@
     <body>
             {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
+        Weather in Santiago: 
+        Temperature: {{temperature}} °C
+        Description: {{description}}
+        Humidity: {{humidity}}%
+        Pressure: {{pressure}} hPa
             {% if messages %}
             
             <table class="table table-bordered">

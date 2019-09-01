@@ -1,3 +1,4 @@
+import requests
 from django.template import loader
 from django.http import HttpResponse
 from django.core.paginator import Paginator
@@ -8,6 +9,13 @@ from .forms import MessageForm
 
 
 def index(request):
+    api_address = 'http://api.openweathermap.org/data/2.5/weather?q=santiago,cl&APPID=8a714970fbc38e21879bb1a4a1e986e9'
+    json_data = requests.get(api_address).json()
+    weather_description = json_data['weather'][0]['description']
+    humidity = json_data['main']['humidity']
+    pressure = json_data['main']['pressure']
+    temperature = str(int(json_data['main']['temp']) - 273)
+
     form = MessageForm(request.POST or None)
     if form.is_valid():
         form.save()
@@ -19,23 +27,14 @@ def index(request):
     context = {
         'form': form,
         'messages': paginator.page(page),
+        'weather_description': weather_description,
+        'pressure': pressure,
+        'humidity': humidity,
+        'temperature': temperature
     }
     return render(request, 'chatting/index.html', context)
     #return HttpResponse(template.render(context, request))
 
 
-# def index(request):
-#     user_list = User.objects.all()
-#     page = request.GET.get('page', 1)
-
-#     paginator = Paginator(user_list, 10)
-#     try:
-#         users = paginator.page(page)
-#     except PageNotAnInteger:
-#         users = paginator.page(1)
-#     except EmptyPage:
-#         users = paginator.page(paginator.num_pages)
-
-#     return render(request, 'core/user_list.html', { 'users': users })
 
 

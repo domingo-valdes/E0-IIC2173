@@ -10,35 +10,40 @@
             {% if messages %}
                   <div class="container">
                         <h1 class="text-center">Chat App</h1>
+                        <br>
+                        <br>
                         {% for message in messages %}
                         <div class="row">
-                            <div class="col-2">
+                            <div class="col-4">
                                 <p class="font-italic" style="color:rgb(40, 38, 160)"><td>{{ message.user_alias }} - {{ message.pub_date }}</td></p>
                             </div>
-                            <div class="col-10">
+                            <div class="col-8">
                                 <p class="font-weight-normal"><td>{{ message.message_text }}</td></p>
                             </div>
                         </div>
                         {% endfor %}
-                        <div class="row">
+                        <div>
+                            
+                        </div clas="row">
+                            <div class="text-center">
                                 {% if messages.has_other_pages %}
-                                <ul class="pagination">
+                                <ul class="pagination justify-content-center">
                                   {% if messages.has_previous %}
-                                    <li><a href="?page={{ messages.previous_page_number }}">&laquo;</a></li>
+                                    <li class="page-item"><a class="page-link" href="?page={{ messages.previous_page_number }}">&laquo;</a></li>
                                   {% else %}
-                                    <li class="disabled"><span>&laquo;</span></li>
+                                    <li class="disabled"><a class="page-link">&laquo;</a></li>
                                   {% endif %}
                                   {% for i in messages.paginator.page_range %}
                                     {% if messages.number == i %}
-                                      <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                                      <li class="active page-item"><a class="page-link">{{ i }} <span class="sr-only">(current)</span></a></li>
                                     {% else %}
-                                      <li><a href="?page={{ i }}">{{ i }}</a></li>
+                                      <li><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
                                     {% endif %}
                                   {% endfor %}
                                   {% if messages.has_next %}
-                                    <li><a href="?page={{ messages.next_page_number }}">&raquo;</a></li>
+                                    <li class="page-item"><a class="page-link" href="?page={{ messages.next_page_number }}">&raquo;</a></li>
                                   {% else %}
-                                    <li class="disabled"><span>&raquo;</span></li>
+                                    <li class="disabled"><a class="page-link">&raquo;</a></li>
                                   {% endif %}
                                 </ul>
                               {% endif %}

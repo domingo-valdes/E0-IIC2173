@@ -25,7 +25,7 @@ SECRET_KEY = 'aa)reeoaqy&c6#s788!_%k109#_t)9n5mgrrebh)dhrfhrglad'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['18.221.93.77', 'www.domingochat.tk', 'domingochat.tk']
+ALLOWED_HOSTS = ['18.221.93.77', 'www.dvochat.tk', 'dvochat.tk']
 
 
 # Application definition

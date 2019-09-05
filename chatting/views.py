@@ -9,7 +9,7 @@ from .forms import MessageForm
 
 
 def index(request):
-    api_address = 'http://api.openweathermap.org/data/2.5/weather?q=santiago,cl&APPID=8a714970fbc38e21879bb1a4a1e986e9'
+    api_address = 'https://api.openweathermap.org/data/2.5/weather?q=santiago,cl&APPID=8a714970fbc38e21879bb1a4a1e986e9'
     json_data = requests.get(api_address).json()
     weather_description = json_data['weather'][0]['description']
     humidity = json_data['main']['humidity']
